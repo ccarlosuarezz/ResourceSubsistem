@@ -1,96 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="shortcut icon" href="Images/system.png" type="image/x-icon">
-    <title>Gestion de recursos</title>
-</head>
-<body>
-    <h1>Subsistema de gestion de recursos</h1>
-    <div class="form_container">
-        <select name="" id="">
-            <option value="disk">Abrir archivo</option>
-            <option value="screen">Mostrar en pantalla</option>
-            <option value="screen">Ingresar por teclado</option>
-        </select>
-        <button id="exec_button" class="exec_button"><b>Ejecutar</b></button>
-    </div>
-    <div class="info">
-        <div class="table_container">
-            <p>Operaciones de los demas subsistemas</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Subsistema</th>
-                        <th>Operación</th>
-                    </tr>
-                </thead>
-                <tbody id="dma_list">
-                    <tr>
-                        <td>Archivos</td>
-                        <td>Ninguna</td>
-                    </tr>
-                    <tr>
-                        <td>Memoria</td>
-                        <td>Ninguna</td>
-                    </tr>
-                    <tr>
-                        <td>Procesos</td>
-                        <td>Ninguna</td>
-                    </tr>
-                    <tr>
-                        <td>Dispositivos</td>
-                        <td>Ninguna</td>
-                    </tr>
-                </tbody>
-            </table>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="styles.css">
+        <link rel="shortcut icon" href="Images/system.png" type="image/x-icon">
+        <link rel="stylesheet" href="https://raw.githubusercontent.com/almende/vis/master/dist/vis.css">
+        <script src="https://raw.githubusercontent.com/almende/vis/master/dist/vis.js"></script>
+
+        <title>Gestion de recursos</title>
+    </head>
+    <body>
+        <h1>Subsistema de gestion de recursos</h1>
+        <div class="form_container">
+            <select name="" id="">
+                <option value="disk">Abrir archivo</option>
+                <option value="screen">Mostrar en pantalla</option>
+                <option value="screen">Ingresar por teclado</option>
+            </select>
+            <button id="exec_button" class="exec_button"><b>Ejecutar</b></button>
         </div>
-        <div class="table_container">
-            <p>Controlador de dispositivos</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Dispositivo</th>
-                        <th>Operacion</th>
-                    </tr>
-                </thead>
-                <tbody id="controller_list">
-                    <tr>
-                        <td>Disco</td>
-                        <td>Ninguna</td>
-                    </tr>
-                    <tr>
-                        <td>Pantalla</td>
-                        <td>Ninguna</td>
-                    </tr>
-                    <tr>
-                        <td>Teclado</td>
-                        <td>Ninguna</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="info">
+            <div class="table_container">
+                <p>Operaciones de los demas subsistemas</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Subsistema</th>
+                            <th>Operación</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dma_list">
+                        <tr>
+                            <td>Archivos</td>
+                            <td>Ninguna</td>
+                        </tr>
+                        <tr>
+                            <td>Memoria</td>
+                            <td>Ninguna</td>
+                        </tr>
+                        <tr>
+                            <td>Procesos</td>
+                            <td>Ninguna</td>
+                        </tr>
+                        <tr>
+                            <td>Dispositivos</td>
+                            <td>Ninguna</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table_container">
+                <p>Controlador de dispositivos</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Dispositivo</th>
+                            <th>Operacion</th>
+                        </tr>
+                    </thead>
+                    <tbody id="controller_list">
+                        <tr>
+                            <td>Disco</td>
+                            <td>Ninguna</td>
+                        </tr>
+                        <tr>
+                            <td>Pantalla</td>
+                            <td>Ninguna</td>
+                        </tr>
+                        <tr>
+                            <td>Teclado</td>
+                            <td>Ninguna</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table_container">
+                <p>DMA</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Datos en DMA</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dma_list">
+                        <tr>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="table_container">
-            <p>DMA</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Datos en DMA</th>
-                    </tr>
-                </thead>
-                <tbody id="dma_list">
-                    <tr>
-                        <td>-</td>
-                    </tr>
-                </tbody>
-            </table>
+
+        <div class="container-fluid p-4" id="resourceSimulator">
+            <h1 class="text-center p-2">Simulador de gestión de recursos</h1>
+
+            <div style="text-align: center;">
+                <table class="table table-dark">
+                    <thead class="text-center p-2">
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Recurso 1</th>
+                            <th scope="col">Recurso 2</th>
+                            <th scope="col">Recurso 3</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Proceso 1</th>
+                            <td>
+                                <button type="button" name="btnProcess" class="btn btn-outline-success"
+                                        onclick="requestFunction(11)">Request
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button" name="btnProcess" class="btn btn-outline-success"
+                                        onclick="requestFunction(12)">Request
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button" name="btnProcess" class="btn btn-outline-success"
+                                        onclick="requestFunction(13)">Request
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Proceso 2</th>
+                            <td>
+                                <button type="button" class="btn btn-outline-success"
+                                        onclick="requestFunction(21)">Request
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-outline-success"
+                                        onclick="requestFunction(22)">Request
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-outline-success"
+                                        onclick="requestFunction(23)">Request
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Proceso 3</th>
+                            <td>
+                                <button type="button" class="btn btn-outline-success"
+                                        onclick="requestFunction(31)">Request
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-outline-success"
+                                        onclick="requestFunction(32)">Request
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-outline-success"
+                                        onclick="requestFunction(33)">Request
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Proceso 4</th>
+                            <td>
+                                <button type="button" class="btn btn-outline-success"
+                                        onclick="requestFunction(41)">Request
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-outline-success"
+                                        onclick="requestFunction(42)">Request
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-outline-success"
+                                        onclick="requestFunction(43)">Request
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Proceso 5</th>
+                            <td>
+                                <button type="button" class="btn btn-outline-success"
+                                        onclick="requestFunction(51)">Request
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-outline-success"
+                                        onclick="requestFunction(52)">Request
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-outline-success"
+                                        onclick="requestFunction(53)">Request
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="dibujo"></div>
         </div>
-    </div>
-    <script src="ProcessStates.js"></script>
-    <script src="Device.js"></script>
-    <script src="ResourcesSubsistem.js"></script>
-</body>
+
+        <script src="ProcessStates.js"></script>
+        <script src="Device.js"></script>
+        <script src="ResourcesSubsistem.js"></script>
+        <script src="ResourceManager.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+                integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+                crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+                integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+                crossorigin="anonymous"></script>
+    </body>
 </html>
