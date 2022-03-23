@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="Images/system.png" type="image/x-icon">
+    <title>Gestion de recursos</title>
+</head>
+<body>
+    <h1>Subsistema de gestion de recursos</h1>
+    <div class="form_container">
+        <select name="" id="">
+            <option value="disk">Leer en disco</option>
+            <option value="screen">Mostrar en pantalla</option>
+            <option value="screen">Ingresar por teclado</option>
+        </select>
+        <button id="exec_button" class="exec_button"><b>Ejecutar</b></button>
+    </div>
+    <div class="info">
+        <div class="table_container">
+            <p>Procesos</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Proceso</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody id="process_list">
+                    <tr>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="ProcessStates.js"></script>
+    <script src="Device.js"></script>
+    <script src="ResourcesSubsistem.js"></script>
+</body>
+</html>
