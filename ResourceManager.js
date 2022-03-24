@@ -48,7 +48,7 @@ function requestFunction(processToResource) {
         && edge.to === processToResource[1]);
 
     if (exist.length === 1) {
-        console.log('Ya agrego previamente esa ruta')
+        edges.remove(exist);
     } else {
         console.log(edges.get())
         edges.add({from: processToResource[0], to: processToResource[1], arrows: "to"});
