@@ -26,6 +26,10 @@ const options = {
 
 
 function createDrawProcess() {
+    let btnRequest = document.getElementById("1A");
+    btnRequest.textContent = 'Dueño';
+    btnRequest.setAttribute("class", "btn btn-danger")
+
     let container = document.getElementById('dibujo');
     let data = {
         nodes: nodes,
@@ -35,26 +39,18 @@ function createDrawProcess() {
 }
 
 function requestFunction(processToResource) {
-    /*edges.get().join(function (edge) {
-        if (edge.from === processToResource[0] && edge.to === processToResource[1]) {
-            console.log('NODO REGISTRADO PREVIAMENTE')
-        } else {
-            console.log('Nodo registrado')
-        }
-        //return edge.from === nodeId || edge.to === nodeId;
-    });*/
-
+    let btnRequest = document.getElementById(processToResource);
     let exist = edges.get().filter(edge => edge.from === processToResource[0]
         && edge.to === processToResource[1]);
-
     if (exist.length === 1) {
         edges.remove(exist);
+        btnRequest.textContent = 'Solicitud';
+        btnRequest.setAttribute("class", "btn btn-outline-success")
     } else {
-        console.log(edges.get())
         edges.add({from: processToResource[0], to: processToResource[1], arrows: "to"});
+        btnRequest.textContent = 'Esperando';
+        btnRequest.setAttribute("class", "btn btn-outline-warning")
     }
-
-    edges.get().forEach(edge => console.log(edge));
 
     let container = document.getElementById('dibujo');
     let data = {
