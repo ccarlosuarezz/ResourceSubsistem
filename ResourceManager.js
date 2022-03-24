@@ -49,7 +49,7 @@ function addElementOrRemove(processToResource) {
         edges.remove(exist);
         setAttributesBtn(processToResource, 'Solicitud', 'btn btn-outline-success');
     } else {
-        if (edges.get().length === 0) {
+        if (edges.get().filter(edge => edge.to === processToResource[1]).length === 0) {
             edges.add({from: processToResource[0], to: processToResource[1], arrows: "to", color: {color: '#E74C3C'}});
             setAttributesBtn(processToResource, 'Dueño', 'btn btn-danger');
         } else {
