@@ -9,7 +9,7 @@ const nodes = new vis.DataSet([
     , {id: "5", label: 'Proceso 5', x: 600, y: 200}
 ]);
 
-let edges = new vis.DataSet([{from: "1", to: "A", arrows: "to", color:{color:'#E74C3C'}}]);
+let edges = new vis.DataSet([{from: "1", to: "A", arrows: "to", color: {color: '#E74C3C'}}]);
 
 const options = {
     interaction: {
@@ -49,8 +49,13 @@ function addElementOrRemove(processToResource) {
         edges.remove(exist);
         setAttributesBtn(processToResource, 'Solicitud', 'btn btn-outline-success');
     } else {
-        edges.add({from: processToResource[0], to: processToResource[1], arrows: "to", color:{color:'#F1C40F'}});
-        setAttributesBtn(processToResource, 'Esperando', 'btn btn-outline-warning');
+        if (edges.get().length === 0) {
+            edges.add({from: processToResource[0], to: processToResource[1], arrows: "to", color: {color: '#E74C3C'}});
+            setAttributesBtn(processToResource, 'Dueño', 'btn btn-danger');
+        } else {
+            edges.add({from: processToResource[0], to: processToResource[1], arrows: "to", color: {color: '#F1C40F'}});
+            setAttributesBtn(processToResource, 'Esperando', 'btn btn-outline-warning');
+        }
     }
 }
 
