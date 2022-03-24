@@ -9,7 +9,7 @@ const nodes = new vis.DataSet([
     , {id: "5", label: 'Proceso 5', x: 600, y: 200}
 ]);
 
-let edges = new vis.DataSet([{from: "1", to: "A", arrows: "to"}]);
+let edges = new vis.DataSet([{from: "1", to: "A", arrows: "to", color:{color:'#E74C3C'}}]);
 
 const options = {
     interaction: {
@@ -25,11 +25,14 @@ const options = {
 };
 
 
-function createDrawProcess() {
-    let btnRequest = document.getElementById("1A");
-    btnRequest.textContent = 'Dueño';
-    btnRequest.setAttribute("class", "btn btn-danger")
+function setAttributesBtn(id, text, className) {
+    let btnRequest = document.getElementById(id);
+    btnRequest.textContent = text;
+    btnRequest.setAttribute("class", className)
+}
 
+function createDrawProcess() {
+    setAttributesBtn('1A', 'Dueño', 'btn btn-danger');
     let container = document.getElementById('dibujo');
     let data = {
         nodes: nodes,
@@ -38,20 +41,21 @@ function createDrawProcess() {
     let network = new vis.Network(container, data, options);
 }
 
-function requestFunction(processToResource) {
-    let btnRequest = document.getElementById(processToResource);
+
+function addElementOrRemove(processToResource) {
     let exist = edges.get().filter(edge => edge.from === processToResource[0]
         && edge.to === processToResource[1]);
     if (exist.length === 1) {
         edges.remove(exist);
-        btnRequest.textContent = 'Solicitud';
-        btnRequest.setAttribute("class", "btn btn-outline-success")
+        setAttributesBtn(processToResource, 'Solicitud', 'btn btn-outline-success');
     } else {
-        edges.add({from: processToResource[0], to: processToResource[1], arrows: "to"});
-        btnRequest.textContent = 'Esperando';
-        btnRequest.setAttribute("class", "btn btn-outline-warning")
+        edges.add({from: processToResource[0], to: processToResource[1], arrows: "to", color:{color:'#F1C40F'}});
+        setAttributesBtn(processToResource, 'Esperando', 'btn btn-outline-warning');
     }
+}
 
+function requestFunction(processToResource) {
+    addElementOrRemove(processToResource);
     let container = document.getElementById('dibujo');
     let data = {
         nodes: nodes,
