@@ -50,11 +50,15 @@ body {
 table{
     border-collapse:separate;
     border-spacing: 0;
-    /* width: 500px; */
+    width: 400px;
     text-align: left;
     border:solid black 1px;
     border-radius:6px;
     -moz-border-radius:6px;
+}
+
+.device_column {
+    width: 100px;
 }
 
 th, td{

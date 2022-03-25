@@ -9,7 +9,7 @@
     <title>Gestion de recursos</title>
 </head>
 <body>
-    <h1>Subsistema de gestion de recursos</h1>
+    <h1>Subsistema de gestión de recursos</h1>
     <div class="form_container">
         <select id="process">
             <option value="disk">Abrir archivo</option>
@@ -20,57 +20,57 @@
     </div>
     <div class="info">
         <div class="table_container">
-            <p>Drivers genericos</p>
+            <p><strong>Controlador de dispositivos</strong></p>
             <table>
                 <thead>
                     <tr>
-                        <th>Dispositivo</th>
-                        <th>Operacion</th>
-                    </tr>
-                </thead>
-                <tbody id="driver_list">
-                    <tr>
-                        <td>Disco</td>
-                        <td>Ninguna</td>
-                    </tr>
-                    <tr>
-                        <td>Pantalla</td>
-                        <td>Ninguna</td>
-                    </tr>
-                    <tr>
-                        <td>Teclado</td>
-                        <td>Ninguna</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="table_container">
-            <p>Controlador de dispositivos</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Dispositivo</th>
+                        <th class="device_column">Dispositivo</th>
                         <th>Operacion</th>
                     </tr>
                 </thead>
                 <tbody id="controller_list">
                     <tr>
-                        <td>Disco</td>
-                        <td>Ninguna</td>
+                        <td><img src="Images/disk.png" width="100"></td>
+                        <td id="controller_disk">Ninguna</td>
                     </tr>
                     <tr>
-                        <td>Pantalla</td>
-                        <td>Ninguna</td>
+                        <td><img src="Images/screen.png" width="100"></td>
+                        <td id="controller_screen">Ninguna</td>
                     </tr>
                     <tr>
-                        <td>Teclado</td>
-                        <td>Ninguna</td>
+                        <td><img src="Images/keyboard.png" width="100"></td>
+                        <td id="controller_keyboard">Ninguna</td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div class="table_container">
-            <p>DMA</p>
+            <p><strong>Drivers genéricos</strong></p>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="device_column">Dispositivo</th>
+                        <th>Operacion</th>
+                    </tr>
+                </thead>
+                <tbody id="driver_list">
+                    <tr>
+                        <td><img src="Images/disk.png" width="100"></td>
+                        <td id="generic_driver_disk">Ninguna</td>
+                    </tr>
+                    <tr>
+                        <td><img src="Images/screen.png" width="100"></td>
+                        <td id="generic_driver_screen">Ninguna</td>
+                    </tr>
+                    <tr>
+                        <td><img src="Images/keyboard.png" width="100"></td>
+                        <td id="generic_driver_keyboard">Ninguna</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table_container">
+            <p><strong>DMA</strong></p>
             <table>
                 <thead>
                     <tr>
@@ -79,13 +79,18 @@
                 </thead>
                 <tbody id="dma_list">
                     <tr>
-                        <td>-</td>
+                        <td id="dma_data"><strong>Dirección del dispositivo:</strong> Ninguna<br>
+                        <strong>Posición inicial de memoria:</strong> 0<br>
+                        <strong>Número de palabras:</strong> 0</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    <script src="ProcessStates.js"></script>
+    <script src="DeviceControllerOperations.js"></script>
+    <script src="GenericDriverOperations.js"></script>
+    <script src="Device.js"></script>
+    <script src="GenericDriver.js"></script>
     <script src="DMA.js"></script>
     <script src="ResourcesSubsistem.js"></script>
 </body>
